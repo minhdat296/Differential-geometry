@@ -1,0 +1,137 @@
+\section{Lie groups}
+    \subsection{The category of Lie groups and Lie's three theorems}
+        Since the category of smooth manifolds has all finite products, we can begin with the following rather nice definition.
+        \begin{definition}[Lie groups] \label{def: lie_groups}
+            The category $\Lie\Grp$ of \textbf{Lie groups} is the category of group objects in the category $C^{\infty}\-\Mfd$ of smooth manifolds, i.e.:
+                $$\Lie\Grp := \Grp( C^{\infty}\-\Mfd )$$
+        \end{definition}
+        In other words, a Lie group is a smooth manifold $G$ equipped with:
+        \begin{itemize}
+            \item an \textbf{associative multiplication}, taking the form of a smooth map $m: G \x G \to G$,
+            \item a \textbf{unit}, taking the form of a map $1_G: \pt \to G$ (and hence automatically smooth),
+            \item an \textbf{inverse}, taking the form of a ($C^{\infty}$-)diffeomorphism $(-)^{-1}: G \xrightarrow[]{\cong} G$,
+        \end{itemize}
+        and these maps are required to satisfy the usual commutative diagrams defining group objects.
+
+        Since the formation of Lie groups as group objects involves only products in $C^{\infty}\-\Mfd$, $\Lie\Grp$ is closed under all limits that can be formed in $C^{\infty}\-\Mfd$. For instance:
+        \begin{itemize}
+            \item if $G$ is a Lie group then the datum of a \textbf{Lie subgroup} $H \leq G$ then consists of a smooth immersion $\iota: H \hookrightarrow G$ such that one can form the following pullback in $C^{\infty}\-\Mfd$:
+                $$
+                    \begin{tikzcd}
+                	{H \x H} & H \\
+                	{G \x G} & G
+                	\arrow["{m|_{H \x H}}", from=1-1, to=1-2]
+                	\arrow["{\iota \x \iota}"', from=1-1, to=2-1]
+                	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+                	\arrow["\iota", hook, from=1-2, to=2-2]
+                	\arrow["m", from=2-1, to=2-2]
+                    \end{tikzcd}
+                $$
+            which is to say that $H$ is a smooth submanifold of $G$ that is also closed under the group operation (cf. \cite[Proposition 7.11]{lee_smooth_manifolds});
+            \item $\Lie\Grp$ has all finite products;
+            \item the trivial Lie group $1$ (whose underlying manifold is $\pt$) is terminal in $\Lie\Grp$;
+        \end{itemize}
+        etc. There are also some important colimits in $\Lie\Grp$, and these happen to be filtered so they commute with finite limits - and hence the formation of group objects in $C^{\infty}\-\Mfd$ - as well:
+        \begin{itemize}
+            \item a homomorphism of Lie groups is an epimorphism if and only if it is an epimorphism of the underlying smooth manifolds, i.e. a smooth surjection with dense image;
+            \item the trivial Lie group $1$ is also initial in $\Lie\Grp$ due to the existence of the unit map, and thus is in fact a zero object.
+        \end{itemize}
+
+        That said, monomorphisms of Lie groups in particular can be a bit weird from a topological viewpoint.
+        \begin{convention}[Immersions]
+            Often, in the differential geometry literature, the domain of an \textbf{immersion} is not assumed to be homeomorphic to its image. However, in algebraic geometry, one always assume that immersions are homeomorphisms onto their images\footnote{At least, \cite{stacks} does ...}. Thus, for the sake of consistency with the terminologies often found in the algebraic geometry literature, let us say that:
+            \begin{itemize}
+                \item a morphism of topological manifolds $f: X \to Y$ is an \textbf{immersion}\footnote{\cite{lee_smooth_manifolds} calls such morphisms \say{embeddings}.} if and only if the underlying set map is injective,
+                \item a morphism of topological manifolds $f: X \to Y$ is \textbf{unramified}/\textbf{submersive}\footnote{Sometimes we might say \say{submersively smooth} for clarity.}/\textbf{\'etale}\footnote{Or \say{locally diffeomorphic}.} if and only if at every point $x \in X$, the differential $df_x: T_{X, x} \to T_{Y, f(x)}$ is injective/surjective/bijective respectively, and the underlying set maps of such morphisms are not necessarily injective/surjective/bijective \textit{a priori}!
+            \end{itemize}
+            An \textbf{embedding} in the sense of \cite{lee_smooth_manifolds} is an unramified immersion.
+
+            If $G$ is a Lie group and $H$ is a Lie subgroup defined by an immersion $\iota: H \hookrightarrow G$ satisfying property $\calP$ (e.g. $\calP = \text{open, closed, unramified, submersive, \'etale, etc.}$), then we will say that $H$ is a \textbf{$\calP$-subgroup} of $G$.
+        \end{convention}
+        \begin{lemma}[Open Lie subgroups are closed] \label{lemma: embedded_lie_subgroups_are_closed}
+            (Cf. \cite[Lemma 7.12]{lee_smooth_manifolds}) Any open Lie subgroup of a Lie group is also closed.
+        \end{lemma}
+            \begin{proof}
+                Let $G$ be a Lie group and $H \leq G$ an open subgroup of $G$. Because the multiplication and the inverse maps on $G$ are both smooth, each left-multiplication map $g \cdot$ (for every $g \in G$) is a diffeomorphism (with smooth inverse given by $g^{-1} \cdot$). Smooth maps are open\footnote{Homeomorphisms are also open, so open subgroups of topological groups in general are also closed.} \textit{a priori}, so for any $g \in G$, the left-coset $gH$ is an open subset of $G$, and it can therefore be endowed with the structure of an open smooth submanifold of $G$. Now, a general fact from group theory is that:
+                    $$G = \coprod_{[g] \in G/H} gH$$
+                which can be rewritten into:
+                    $$H = G \setminus \coprod_{[g] \in G/H, g \not \in H} gH$$
+                since $gH \not = H$ if and only if $g \not \in H$. $\coprod_{[g] \in G/H, g \not \in H} gH$ is a union of open submanifolds of $G$, hence also open, so $H$ must be closed.
+            \end{proof}
+        \begin{corollary}[Smooth functions on open Lie subgroups] \label{coro: smooth_functions_on_open_lie_subgroups}
+            Let $G$ be a Lie group and let $H \leq G$ be an open subgroup defined by an open immersion $\iota: H \hookrightarrow G$. Then, their shall exist a surjective morphism in $\Sh(G)$:
+                $$\scrO_G \to \iota_* \scrO_H$$
+        \end{corollary}
+            \begin{proof}
+                
+            \end{proof}
+        \begin{corollary}
+            Any open or closed Lie subgroup $H$ of a Lie group $G$ can be partitioned into a disjoint union of its connected components, which are nothing but the intersections of $H$ with the connected components of $G$.
+        \end{corollary}
+        \begin{lemma}[Closed immersions are unramified] \label{lemma: closed_immersions_are_unramified}
+            Any closed immersion between smooth manifolds is automatically unramified.
+        \end{lemma}
+            \begin{proof}
+                
+            \end{proof}
+        \begin{proposition}[Embedded Lie subgroups are closed] \label{prop: embedded_lie_subgroups_are_closed}
+            (Cf. \cite[Theorem 7.21]{lee_smooth_manifolds}) Any unramified immersion between Lie groups is automatically a closed immersion, i.e. embedded Lie subgroups are closed. Thus, a Lie subgroup is embedded if and only if it is closed.
+        \end{proposition}
+            \begin{proof}
+                
+            \end{proof}
+
+        Additionally, a new subtlety that one will usually have to keep in mind when dealing with Lie groups is that they may be disconnected. For instance, this leads to the phenomenon whereby two isomorphic Lie algebras can arise from two non-isomorphic Lie groups which are only locally diffeomorphic to one another.
+        \begin{convention}
+            If $G$ is a Lie group, then the connected component of the identity will usually be denoted by $G_0$.
+        \end{convention}
+        \begin{remark}
+            If $G$ is a Lie group, then $G_0$ is the only connected component of $G$ that is also a Lie subgroup, since the connected components do not contain the identity element. Also, because connected components are closed, the immersion $G_0 \hookrightarrow G$ is necessarily unramified by proposition \ref{prop: embedded_lie_subgroups_are_closed}.
+        \end{remark}
+        \begin{lemma}[Open subgroups of the identity component] \label{lemma: open_subgroups_of_the_identity_component}
+            Let $G$ be a Lie group. The underlying set of any open neighbourhood of the identity element $1 \in G$ generates $G_0$.
+        \end{lemma}
+            \begin{proof}
+                
+            \end{proof}
+
+        \todo[inline]{Lie's theorems}
+
+    \subsection{Lie group actions and principal bundles}
+        Groups, like people, are defined by their actions (even if the action is to lie). Since the notion of group actions makes sense in any category with enough finite products, we can speak of Lie group actions on smooth manifolds, and this gives rise to one of the most important construction in differential geometry, that of \say{principal bundles} (also called \say{torsors}).
+
+        \begin{definition}[Equivariance] \label{def: equivariance}
+            
+        \end{definition}
+
+        If $X, Y$ are smooth manifolds, then the tangent space at a point $(x, y) \in X \x Y$ will be isomorphic to $T_{X, x} \x T_{Y, y}$ (and this happens to be isomorphic to $T_{X, x} \oplus T_{Y, y}$). Thus, any Lie group action:
+            $$\alpha: G \x X \to  X$$
+        induces a Lie algebra action:
+            $$d\alpha_{(1, x)}: \g \x T_{X, x} \to T_{X, x}$$
+        around any point $x \in X$, wherein $\g := T_{G, 1}$, and this tells us that Lie group actions can be understood in terms of Lie algebra representations.
+        \begin{example}[Adjoint actions] \label{example: adjoint_actions}
+            Let $G$ be a Lie group. Since the multiplication and inverse maps of $G$ are smooth by definition, there is an action of $G$ on itself via conjugation, called the \textbf{adjoint action}. By picking a smooth curve $\gamma: (-\e, \e) \to G$ and the differentiating, one sees that at the level of tangent spaces, this coincides with the adjoint action of $\g := T_{G, 1}$ on itself. 
+        \end{example}
+        \begin{example}[Coverings and deck transformations] \label{example: coverings_and_deck_transformation}
+            In the category of topological manifolds, a map between smooth manifolds $\pi: Y \to X$ is said to be \textbf{finite} if every point $x \in X$ admits some open neighbourhood $U_x \ni x$ such that $\pi^{-1}(U_x) \cong \coprod_{i \in I} V_x$ for some set $I$ that is \textit{independent} of $x$, and each \textbf{sheet} $V_x \subseteq Y$ is diffeomorphic to $U_x$. Finite maps need not be smooth!
+        
+            A \textbf{smooth covering} shall be a smooth surjection:
+                $$\pi: Y \to X$$
+            that is also finite. Any covering can be regarded as an object of the category $(C^{\infty}\-\Mfd_{/X})_{\surj}$ of smooth manifolds with a smooth surjection onto $X$. Now, consider the group $\Aut_{(C^{\infty}\-\Mfd_{/X})_{\surj}}(\pi: Y \to X)$ whose elements are diffeomorphisms $\sigma: Y \xrightarrow[]{\cong} Y$ fitting into commutative triangles in $C^{\infty}\-\Mfd$ as follows:
+                $$
+                    \begin{tikzcd}
+                	Y && Y \\
+                	& X
+                	\arrow["\sigma", from=1-1, to=1-3]
+                	\arrow["\pi"', from=1-1, to=2-2]
+                	\arrow["\pi", from=1-3, to=2-2]
+                    \end{tikzcd}
+                $$
+            and whose group operation is given by compositions of such diffeomorphisms; we will usually denote this group by $\Aut_{C^{\infty}}(Y/X)$ or $\Aut(\pi)$. Since the set $I$ that index the sheets above a given point $x \in X$ does not depend on $x$, 
+        \end{example}
+        \begin{lemma}[Smooth coverings are finite-\'etale] \label{lemma: smooth_coverings_are_finite_etale}
+            In the category of topological manifolds, a morphism is a smooth covering if and only if it is finite and \'etale.
+        \end{lemma}
+            \begin{proof}
+                
+            \end{proof}

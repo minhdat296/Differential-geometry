@@ -1,4 +1,4 @@
-\section{The category of topological manifolds vs. the category of smooth manifolds}
+\section{Differentiable manifolds}
     \subsection{Topological manifolds}
         We begin by discussing topological manifolds, which are very special topological spaces which locally resemble $\R^n$ in a precise sense. For readers familiar with ringed spaces, these topological manifolds will be the underlying spaces of the smooth manifolds that we will discuss in the next subsection: to us, smooth manifolds will be topological manifolds equipped with $C^{\infty}$ structure sheaves of $\R$-algebras, so-called \say{smooth structures}.
     
@@ -75,7 +75,7 @@
         \end{example}
 
         \textit{We insist on the point of view that topology and geometry are best understood structurally, which means that every construction should form some kind of a category, and we will pursue this viewpoint by investigating the kinds of limits and colimits that can exist in these categories.} Manifolds are no exception. 
-        \begin{proposition}[The category of topological manifolds]
+        \begin{proposition}[The category of topological manifolds] \label{prop: category_of_topological_manifolds}
             \begin{enumerate}
                 \item There is a category $\Mfd$ whose objects are manifolds (of all dimensions $n \in \N$) and whose morphisms are continuous maps between them.
                 \item This category is closed under open immersions and finite pullbacks. Furthermore, if $X$ is an $n$-manifold and $U \hookrightarrow  X$ is an open immersion, then $\dim U = \dim X$, and the pullback of two open immersions, say $U \hookrightarrow  X, U' \hookrightarrow  X$ coincides with the intersection $U \cap U'$ (with the canonically induced open immersion $U \cap U' \to X$). 
@@ -90,16 +90,16 @@
                 \end{enumerate}
             \end{proof}
 
-    \subsection{Smooth structures}
+    \subsection{Differentiable structures}
         Since manifolds locally resemble Euclidean spaces, it makes sense to speak of derivatives of maps between manifolds, which is a purely local construction.
-        \begin{definition}[$C^k$-functions] \label{def: C_k_functions}
-            Let $X, Y$ be manifolds and $f: X \to Y$ be a morphism. Such a map is said to be $C^k$ if and only if it admits \textit{continuous} $k^{th}$ order partial derivatives, and if it admits continuous partial derivatives of all orders, then we shall say that it is $C^{\infty}$ or \textbf{smooth}. $C^0$ means continuity.
+        \begin{definition}[Differentiable functions] \label{def: differentiable_functions}
+            Let $X, Y$ be manifolds and $f: X \to Y$ be a morphism. Such a map is said to be $C^k$ if and only if it admits \textit{continuous} $k^{th}$ order partial derivatives, and if it admits continuous partial derivatives of all orders, then we shall say that it is $C^{\infty}$ or \textbf{smooth}. A $C^k$-function with a $C^k$-inverse is said to be a \textbf{$C^k$-diffeomorphism}. $C^0$ means continuity, and a $C^0$-diffeomorphism is nothing but a homeomorphism.
 
             The set of $C^k$-functions from $X$ to $Y$ is denoted by $C^k(X, Y)$, and note that when $Y = \R$, this is furthermore a commutative $\R$-algebra via pointwise addition and multiplication.
         \end{definition}
         We remind the reader that one takes the derivative of $f$ at a point $x \in X$ by firstly choosing an open neighbourhood $V \ni f(x)$ along with charts $(V, \psi), (f^{-1}(V), \varphi)$, which identify $V$ and its preimage $f^{-1}(V)$ with, say $\R^m$ and $\R^n$. The rest is vector calculus.
 
-        In light of definition \ref{def: C_k_functions}, let us consider the following. First, suppose that $X$ is a topological manifold and let $X_{\open}$ denote the small\footnote{This site is small because a manifold has only countably many connected component and is locally compact.} site whose objects are open immersions $U \hookrightarrow X$ and whose morphisms are the commutative triangles in $\Mfd$ between such maps. Next, choose some $k \in \N \cup \{+\infty\}$ consider the following distinguished object of $\Psh(X_{\open})$:
+        In light of definition \ref{def: differentiable_functions}, let us consider the following. First, suppose that $X$ is a topological manifold and let $X_{\open}$ denote the small\footnote{This site is small because a manifold has only countably many connected component and is locally compact.} site whose objects are open immersions $U \hookrightarrow X$ and whose morphisms are the commutative triangles in $\Mfd$ between such maps. Next, choose some $k \in \N \cup \{+\infty\}$ consider the following distinguished object of $\Psh(X_{\open})$:
             $$\scrO_X$$
         which is given by:
             $$\scrO_X(U) := C^k(U, \R)$$
@@ -111,40 +111,233 @@
             $$\scrO_X(\varphi_3 \circ \varphi_2 \circ \varphi_1)(g) := g \circ ( \varphi_3 \circ \varphi_2 \circ \varphi_1 )$$
         from which one easily infers associative. Now, we claim that $\scrO_X$ is actually a sheaf. For convenience, let us for now also say that the pair:
             $$(X, \scrO_X)$$
-        as above is a \textbf{$C^k$-premanifold} and we will be referring to $\scrO_X$ as the \textbf{structure presheaf}.
+        as above is a \textbf{differentiable premanifold} and we will be referring to $\scrO_X$ as the \textbf{structure presheaf}.
+        \begin{lemma}[Pullbacks of differentiable open immersions] \label{lemma: pullback_of_differentiable_immersions}
+            Fix some $k \in \N \cup \{+\infty\}$ and suppose that $X$ is a $C^k$-premanifold. If $\iota_1: U_1 \hookrightarrow U, \iota_2: U_2 \hookrightarrow U$ are open immersions which are also $C^k$, then the canonically induced map $U_1 \cap U_2 \hookrightarrow U$ will also be $C^k$.
+        \end{lemma}
+            \begin{proof}[Proof sketch]
+                Use the fact that open subsets of $n$-manifolds are also $n$-manifolds to identify $U_1, U_2$ with two open $n$-balls.
+            \end{proof}
+        \begin{corollary}[Differentiable topologies] \label{coro: differentiable_topologies}
+            Let $X$ be a $C^k$-premanifold. Then, there shall exist a site $X_{C^k}$ wherein objects are $C^k$-open immersions into $X$, morphisms are commutative triangles of $C^k$-functions between said $C^k$-open immersions, and coverings are given by jointly surjective families of $C^k$-immersions $\{U_i \hookrightarrow U\}_{i \in I}$.
+
+            Furthermore, if $k < l$ then $X_{C^k}$ will be a refinement of $X_{C^l}$, in the sense that if $\scrF$ is a $C^k$-sheaf then it will also be a $C^l$-sheaf. 
+        \end{corollary}
+            \begin{proof}
+                The first assertion comes directly from lemma \ref{lemma: pullback_of_differentiable_immersions}. The second assertion is due to the fact that if $k < l$ then any $C^l$-chart will also be a $C^k$-chart.
+            \end{proof}
+        We will also usually write $X_{\smooth} := X_{C^{\infty}}$ and refer to this as the \textbf{smooth site} of $X$. Note also that a $C^{\infty}$-manifold can only admit $C^{\infty}$-covers.
         \begin{proposition}[$C^k$-premanifolds are ringed spaces] \label{prop: premanifolds_are_ringed_spaces}
-            For any $C^k$-premanifold $(X, \scrO_X)$, the structure presheaf $\scrO_X$ satisfies descent, i.e. is a sheaf on $X_{\open}$. 
+            The structure presheaf of any $C^k$-premanifold (for any $k \in \N \cup \{+\infty\}$) satisfies $C^k$-descent.
         \end{proposition}
             \begin{proof}
+                Recall that for $\C$ a site with enough pullbacks and enough representables, and for $F: \C^{\op} \to \calA$ a presheaf with values in some algebraic category $\calA$ (e.g. the categories of groups, rings, modules over a given ring, etc.), such a presheaf is said to satisfy descent if and only if for any object $U \in \Ob(\C)$ and any covering $\{U_a \to U\}_{a \in A}$, the following diagram is an equaliser:
+                    $$F(U) \to \prod_{c \in A} F(U_c) \toto \prod_{(a, b) \in A^2} F(U_a \x_U U_b)$$
+                In our case where $\C := X_{C^k}$, the pullbacks are intersections of open subsets of $X$ whose open immersions into $X$ are $C^k$ (see proposition \ref{prop: category_of_topological_manifolds}).
+            
+                Let $U_1, U_2, U_3 \in \Ob(X_{\open})$ be open subsets of $X$ and let $\iota_{a, b}^c: U_a \cap U_b \hookrightarrow U_c$ ($a, b, c \in \{1, 2, 3\}$) be the canonical open immersions (which exists only when $c \in \{a, b\}$). After picking $C^k$-charts $\varphi_{U_a}: U_a \xrightarrow[]{\cong} \R^{n_a}$ (where $a \in \{1, 2, 3\}$), we would like to prove that the immersions $\iota_{a, b}^c$ shall induce $\R$-algebra homomorphisms $C^k(\R^{n_c}, \R) \to C^k(\R^{n_a} \cap \R^{n_b}, \R)$ given by $f \mapsto \varphi_{U_a \cap U_b} \circ f \circ \varphi_{U_c}^{-1}$. Note also that $\varphi_{U_a \cap U_b} = 0$ if and only if $\R^{n_a} \cap \R^{n_b} = \{0\}$ (should we regard $\R^{n_a}, \R^{n_b}$ as subspaces of some $\R^N$ for some $N \geq n_a, n_b$), i.e. if and only if $U_a \cap U_b = \varnothing$. Next, let us choose further identifications $\R^{n_a} \xrightarrow[]{\cong} \B^{n_a}_{\e_a}(x_a)$ for some $x_a \in \R^{n_a}$ and $\e_a > 0$, and let us now also remind the reader that because $U_a \subseteq X$ are open subsets, $n_a = \dim X$ for all $a \in \{1, 2 , 3\}$. The problem then reduces to showing that if $f$ is $C^k$ on two open balls of the same dimension, then it will also be $C^k$ on the intersection. We thus have well-defined $\R$-algebra homomorphisms $C^k(U_c, \R) \to C^k(U_a \cap U_b, \R)$ given by $f \mapsto \varphi_{U_a \cap U_b} \circ f \circ \varphi_{U_c}^{-1}$. We then infer from this that there exists a pair of $\R$-algebra homomorphisms:
+                    $$\prod_{c \in A} C^k(U_c, \R) \toto \prod_{(a, b) \in A^2} C^k(U_a \cap U_b, \R)$$
+                where $A$ is any arbitrary (countable) indexing set.
                 
+                To check that $\scrO_X$ is a $C^k$-sheaf, it now remains to check that the equaliser of the diagram above coincides with $C^k(U, \R)$, for every $U \in \Ob(X_{\open})$ with $\{U_a \hookrightarrow U\}_{a \in A}$ as an open cover. This is essentially the statement that if $f: U \to \R$ is $C^k$ on an open subsets $U \subseteq \R^n$ then for every open subset $U' \subseteq U$, the function $f|_{U'}$ will also be $C^k$. This can be verified by first letting the open subsets in questions be open balls of radii $\e > \e'$ repsectively and then using vector calculus.
             \end{proof}
 
-        \begin{definition}[$C^k$-manifolds] \label{def: C_k_manifolds}
+        \begin{definition}[Differentiable manifolds] \label{def: differentiable_manifolds}
             For a given $k \in \N \cup \{+\infty\}$, a \textbf{$C^k$-manifold} is a manifold $X$ equipped with the sheaf of $\R$-algebras $\scrO_X$ on $X_{\open}$ that is given by:
                 $$\scrO_X(U) := C^k(U, \R)$$
             A $C^{\infty}$-manifold is also commonly called a \textbf{smooth manifold}.
         \end{definition}
-        
-        \begin{proposition}
-            For each $k \in \N \cup \{+\infty\}$, there exists a category $C^k\-\Mfd$ of $C^k$-manifolds and $C^k$-maps between them as morphisms. Note that $C^0\-\Mfd = \Mfd$, tautologically.
+
+        Like ordinary topological manifolds, there is a category of $C^k$-manifolds for each $k$. To know what the morphisms ought to be, though, let us make the following digression.
+        \begin{remark}[Open does not imply smooth!] \label{remark: open_does_not_imply_smooth}
+            Let $\iota: W \hookrightarrow X$ be an immersion of a manifold $W$ into another manifold $X$. Should the reader be familiar with schemes, they would have heard of a statement along the lines of:
+            
+            \begin{center}
+                \say{an immersion is smooth (in fact, \'etale) if and only if it is open}
+            \end{center}
+            \noindent
+            In the current setting, however, \textit{there are plenty of open immersions that are not smooth}; in fact, there are many homeomorphisms that are not diffeomorphic (e.g. $\iota: \R \to \R$ given by $\iota(x) := x^n$ for some odd $n$: its continuous inverse is $\iota^{-1}(y) := y^{\frac1n}$, but this is not differentiable at $y = 0$, since $\frac{d}{dy} \iota^{-1}(y) = \frac1n y^{\frac{1 - n}{n}}$ is a formal expression that is undefined at $y = 0$ as $\frac{1 - n}{n} < 0$). We do, though, have that \textit{if $\iota$ is smooth then it will be open}, or more generally, that being $C^k$ implies being open for immersions of manifolds, which leads to proposition \ref{prop: categories_of_differentiable_manifolds}.
+
+            What is slightly confusing is that often, one also finds statements of the kind:
+            
+            \begin{center}
+                \say{any open subset of a smooth manifold has a unique induced smooth structure, and hence is also a smooth manifold}
+            \end{center}
+            \noindent
+            throughout the differential geometry literature, which seemingly contradicts the previous analysis. What is actually happening here is that (and to keep the previous notations) if $X$ is a $C^k$-manifold (for the sake of generality) and if $\iota: W \hookrightarrow X$ is an open immersion, then:
+                $$(W, \iota^*\scrO_X)$$
+            will be another $C^k$-manifold as along as $\iota$ itself is a $C^k$-function, because we now know through proposition \ref{prop: premanifolds_are_ringed_spaces} that $\scrO_X$ is a sheaf on $X_{\open}$. Because:
+                $$\iota^*\scrO_X(U) := \indlim_{ V \supseteq \iota(U) } \scrO_X(V) \cong  \indlim_{ V \supseteq \iota(U) } C^k(V, \R)$$
+            which allows us to identify any:
+                $$f \in C^k(V, \R)$$
+            with:
+                $$f \circ \iota \in \iota^*\scrO_X(U)$$
+            we thus see clearly that $f \circ \iota$ can not be $C^k$, and therefore can not be a well-defined element of $\iota^*\scrO_X(U)$, when $\iota$ is not $C^k$.
+
+            In conclusion, morphisms of $C^k$-manifolds ought to be $C^k$-functions.
+
+            We would also like to point out one other crucial reason for morphisms of $C^k$-manifolds to be $C^k$-functions: there should be $C^k$-manifolds whose underlying topological spaces are homeomorphic, but nevertheless are non-isomorphic as $C^k$-manifolds. The function $\iota: \R \to \R$ given by $\iota(x) := x^n$ for $n$ odd, as above, is again an example. 
+        \end{remark}
+        \begin{proposition}[Categories of differentiable manifolds] \label{prop: categories_of_differentiable_manifolds}
+            For each $k \in \N \cup \{+\infty\}$, there exists a category $C^k\-\Mfd$ with $C^k$-manifolds as objects and $C^k$-maps between them as morphisms.
         \end{proposition}
             \begin{proof}
-                
+                Clear from the fact that compositions of $C^k$-functions are once more $C^k$.
+            \end{proof}
+        Note also that $C^0\-\Mfd = \Mfd$, tautologically. As for the limits and colimits that can exist in the categories $C^k\-\Mfd$, we will touch on the topic shortly.
+        
+        Actually, $C^k$-manifolds are not merely ringed spaces, but \textit{locally} ringed spaces. Before phrasing this properly as a proposition, let us note beforehand that if $(X, \scrO_X)$ is a $C^k$-manifold and $x \in X$ is any point, and $U \ni x$ is an open neighbourhood thereof, then the evaluation map:
+            $$\ev_x: C^k(U, \R) \to \R$$
+        given by:
+            $$\ev_x(f) := f(x)$$
+        is in fact a surjective $\R$-algebra homomorphism. this is because for every $c \in \R$, there exists the constant function $\underline{c}: U \to \R$ which is trivially $C^k$, and hence a well-defined element of $C^k(U, \R)$. 
+        \begin{proposition}[$C^k$ manifolds are locally ringed spaces] \label{prop: differentiable_manifolds_are_locally_ringed_spaces}
+            Fix some $k \in \N \cup \{+\infty\}$.
+            \begin{enumerate}
+                \item Let $(X, \scrO_X)$ be a $C^k$-manifold. Then, for every $x \in X$, the stalk:
+                    $$\scrO_{X, x} := \indlim_{U \in \Ob(X_{\open}), U \ni x} \scrO_X(U)$$
+                of the structure sheaf will be a local $\R$-algebra: namely, the unique maximal ideal $\m_{X, x} \subset \scrO_{X, x}$ is spanned by (smooth) functions $f \in C^k(U, \R)$ (with $U \ni x$ being some open neighbourhood) such that $f(x) = 0$, i.e. it is the kernel of the evaluation map $\ev_x: C^k(U, \R) \to \R$ given by $\ev_x(f) := f(x)$. 
+                \item Furthermore, $C^k\-\Mfd$ is in fact a subcategory of $\LRS$, i.e. every morphism of $C^k$ manifolds is a morphism of locally ringed spaces\footnote{Though, the converse isn't necessarily true. See remark \ref{remark: open_does_not_imply_smooth}.}.
+            \end{enumerate}
+        \end{proposition}
+            \begin{proof}
+                \begin{enumerate}
+                    \item Clear from the surjectivity of the $\R$-algebra homomorphism $\ev_x$.
+                    \item The only thing to show is that if $\varphi: X \to Y$ is a morphism in $C^k\-\Mfd$, and $x \in X$ is any point, then the $\R$-algebra homomorphism $\varphi^{\sharp}_x: \scrO_{Y, \varphi(x)} \to \scrO_{X, x}$ - canonically induced by the pushforward map $\varphi^{\sharp}: \scrO_Y \to \varphi_* \scrO_X$ - is local; for the sake of thoroughness, let us note that due to the functoriality of colimits, $\varphi^{\sharp}_x$ is still given by $g \mapsto g \circ \varphi$ for every $g \in C^k(U, \R)$ where $U \ni x$ is an open neighbourhood. If $g \in \m_{Y, \varphi(x)}$ then $g(\varphi(x)) = 0$ per the previous assertion, but this equivalently means that $\varphi^{\sharp}_x(g)(x) = 0$. As such, $\varphi^{\sharp}_x( \m_{Y, \varphi(x)}) \subseteq \m_{X, x}$, and hence $\varphi^{\sharp}_x$ is indeed a local $\R$-algebra homomorphism.
+                \end{enumerate}
             \end{proof}
 
-        \begin{proposition}[The $C^k$-topologies] \label{prop: C_k_topologies}
+    \subsection{Partitions of unity and soft sheaves}
+        \begin{definition}[Partitions of unity] \label{def: partitions_of_unity}
+            A \textbf{$C^k$-partition of unity} of a $C^k$-manifold $X$ is the data of a $C^k$-cover $\{U_i \hookrightarrow X\}_{i \in I}$ (in the sense of corollary \ref{coro: differentiable_topologies}) along with a family of $C^k$-functions $\{f_i: U_i \to [0, 1]\}_{i \in I}$ such that:
+            \begin{itemize}
+                \item for all points $x \in X$:
+                    $$\sum_{i \in I} f_i(x) = 1$$
+                \item each $\supp f_i := \overline{ \{ x \in U_i \mid f_i(x) \not = 0 \} }$ is a para-compact subset of $U_i$.
+            \end{itemize}
+        \end{definition}
+        \begin{lemma}[Para-compact spaces have partitions of unity] \label{lemma: para_compact_spaces_have_partitions_of_unity}
+            A Hausdorff topological space is para-compact if and only if it admits a $C^0$-partition of unity. 
+        \end{lemma}
+            \begin{proof}
+                Let $X$ be a Hausdorff topological space.
             
+                Suppose firstly that $X$ is para-compact. Because $X$ is Hausdorff, it admits a disjoint partition:
+                    $$X := \coprod_{i \in I} U_i$$
+                into open subsets $U_i$. The sought-for $C^0$-partition of unity can then be taken to be the family of characteristic functions $\chi_{U_i}: U_i \to [0, 1]$ which are given by:
+                    $$
+                        \chi_{U_i}(x) :=
+                        \begin{cases}
+                            \text{$1$ if $x \in U_i$}
+                            \\
+                            \text{$0$ if $x \not \in U_i$}
+                        \end{cases}
+                    $$
+                and hence are continuous and such that $\supp \chi_{U_i} \subset U$ by construction. As $X$ is para-compact, so are the subsets $\supp \chi_{U_i}$ (with respect to their subspace topologies). Since each point $x \in X$ can only belong to one of the open subsets $U_i$, we also have that:
+                    $$\sum_{i \in I} \chi_{U_i}(x) = 1$$
+                for all $x \in X$. As such, we have constructed a $C^0$-partition of unity for $X$.
+
+                Conversely, suppose that $X$ admits a $C^0$-partition of unity $\{f_i: U_i \to [0, 1]\}_{i \in I}$. Per the definition of partitions of unity, $\{U_i \to X\}_{i \in I}$ is an open cover of $X$, and because $X$ is Hausdorff, we can assume that the open subsets $U_i$ are disjoint, i.e.:
+                    $$X := \coprod_{i \in I} U_i$$
+                which, in particular, implies that:
+                    $$\forall i, j \in I: \supp f_i \cap \supp f_j = \varnothing$$
+                since $\supp f_i \subseteq U_i$. Now, for any continuous function $f: U \to \R$, note that:
+                    $$(X \setminus \supp f) \cap U = U \setminus \supp f := \{ x \in U \mid f(x) = 0 \}$$
+                from which we gather that:
+                    $$X \setminus \coprod_{i \in I} \supp f_i = (X \setminus \coprod_{i \in I} \supp f_i) \cap \coprod_{i \in I} U_i = \coprod_{i \in I} (U_i \setminus \supp f_i)$$
+                Now, let $\mu_i: \calB(U_i) \to \R_{\geq 0}$ be the Borel measure. Then:
+                    $$\int_{U_i} f d\mu_i = \int_{\supp f_i} f d\mu_i$$
+                for all measureable functions $f: U_i \to \R$. The above shows that:
+                    $$\mu_i(U_i \setminus \supp f_i) = \int_{U_i} \chi_{U_i \setminus \supp f_i} d\mu_i = 0$$
+                This shows that the interior of $U_i \setminus \supp f_i$ is empty, but $U_i \setminus \supp f_i$ is an open subset of $U_i$ (since $\supp f_i$ is closed by definition), and hence:
+                    $$U_i \setminus \supp f_i = \varnothing$$
+                Per the definition of partitions of unity, $\supp f_i$ is para-compact, and since the open subsets $U_i$ together form an open cover of $X$, we have managed to show that $X$ is para-compact.
+            \end{proof}
+        Since topological manifolds are para-compact \textit{a priori}, lemma \ref{lemma: para_compact_spaces_have_partitions_of_unity} implies in particular that topological manifolds admit $C^0$-partitions of unity. In fact, this holds true for all $C^k$-manifolds, for all $k \in \N \cup \{+\infty\}$.
+        \begin{proposition}[Existence of partitions of unity] \label{prop: existence_of_partitions_of_unity}
+            For any $k \in \N \cup \{+\infty\}$, any $C^k$-manifold admits a partition of unity.
         \end{proposition}
+            \begin{proof}
+                Characteristic functions are smooth, and $C^k$-manifolds are para-compact \textit{a priori}, and the assertion follows.
+            \end{proof}
+    
+        \begin{theorem}[Existence of partitions of unity implies acyclicity of structure sheaves]
+            Let $X$ be a $C^k$-manifold, for some $k \in \N \cup \{+\infty\}$. Then, the structure sheaf $\scrO_X$ is acyclic.
+        \end{theorem}
             \begin{proof}
                 
             \end{proof}
-        \begin{lemma}[$C^k$-structures] \label{lemma: C_k_structures}
-            Let $(X, \scrO_X)$ be a $C^k$-manifold, for some $k \in \N \cup \{+\infty\}$. Then, the structure sheaf $\scrO_X$ will also satisfy $C^k$-descent.
+        \begin{corollary}[Domain expansions of smooth functions]
+            
+        \end{corollary}
+
+        \begin{definition}[Coherent modules] \label{def: coherent_modules}
+            
+        \end{definition}
+
+    \subsection{Submersions, transversality of intersections, and fibred products}
+        \begin{definition}[Tangent spaces] \label{def: tangent_spaces}
+            Let $X$ be a $C^k$-manifold (for some $k \in \N \cup \{+\infty\}$). Then, the \textbf{tangent space} at a point $x \in X$ shall be the vector space of degree-$1$ differential operators on $\scrO_{X, x}$ with values in $\R$, i.e.:
+                $$T_{X, x} := \Diff^1_{\R}( \scrO_{X, x}, \R )$$
+            Elements of tangent spaces are usually called \textbf{vector fields}.
+        \end{definition}
+        By picking local coordinates $x := (x_1, ..., x_{\dim X})$ for an open neighbourhood $U_x \ni x$ which is sufficiently small so that $\scrO_{X, x} \cong C^k(U_x)$, we can also identify:
+            $$T_{X, x} \cong \bigoplus_{i = 1}^{\dim X} C^k(U_x)/\m_x \cdot \frac{\del}{\del x_i} |_x \cong \bigoplus_{i = 1}^{\dim X} \scrO_{X, x}/\m_x \cdot \frac{\del}{\del x_i} |_x \cong \bigoplus_{i = 1}^{\dim X} \R \cdot \frac{\del}{\del x_i} |_x$$
+        wherein $(-) |_x$ means evaluation at $x$. Note that the coefficients are taken modulo $\m_x$ because this (maximal) ideal of $\scrO_{X, x}$ is spanned by $C^k$-functions $f: U_x \to \R$ that vanish at $x$, and hence summands with such functions as coefficients will not matter anyway. From the above, it is trivial to see that at all points $x \in X$ of a $C^k$-manifold, we have that:
+            $$\dim T_{X, x} = \dim X$$
+
+        Alternatively, we can characterise the tangent space at $x \in X$ by:
+            $$T_{X, x} \cong \Der_{\R}(\scrO_{X, x}, \R)$$
+
+        For what follows, recall that for any homomorphism of commutative rings $R \to S$, the $S$-module of differential $1$-forms is given by:
+            $$\Omega^1_{S/R} := (S \tensor_R S)/J_{S/R}$$
+        with $J_{S/R} \subset S \tensor_R S$ is the ideal generated by elements of the form:
+            $$fg \tensor 1 - f \tensor g - g \tensor f$$
+        given for all $f, g \in S$. Such modules are the objects that corepresent the functor:
+            $$\Der_R(S, -): S\mod \to S\mod$$
+        in the sense that there is a natural isomorphism:
+            $$\Hom_S(\Omega^1_{S/R}, -) \cong \Der_R(S, -)$$
+        For more details, see \cite[\href{https://stacks.math.columbia.edu/tag/00RM}{Tag 00RM}]{stacks}.
+        \begin{lemma}[Cotangent sheaves and cotangent bundles] \label{lemma: cotangent_sheaves_and_budnles}
+            For every $C^k$-manifold $X$, there is a coherent\footnote{In fact, a vector bundle, but we will come back to this later.} $\scrO_X$-module $\Omega^1_X$ given for every $C^k$-open immersion $U \subseteq X$ by:
+                $$\Omega^1_X(U) := \Omega^1_{C^k(U)/\R}$$
         \end{lemma}
             \begin{proof}
                 
             \end{proof}
-    
-        \todo[inline]{Existence of partitions of unity implies acyclicity of structure sheaves}
-
-    \subsection{Submersions, transversality of intersections, and fibred products}
+        \begin{corollary}[Tangent sheaves and tangent bundles] \label{coro: tangent_sheaves_and_bundles}
+            
+        \end{corollary}
+        \begin{lemma}[Cotangent spaces]
+            
+        \end{lemma}
+            \begin{proof}
+                
+            \end{proof}
+        \begin{convention}
+            To conform to a traditional convention in the theory of integral equations, in calculus of variations, and in probability theory, the arguments of functions whose inputs are linear functionals will be placed between square brackets $[]$ as opposed to the usual parentheses $()$. For example, if $V, W$ are vector spaces and $T: V \to W$ is a linear map then the evaluation of the dual map $T^*: W^* \to V^*$ on functionals $\psi \in W^*$ will be written:
+                $$T[\psi^*]$$
+            instead of $T(\psi^*)$. This may also help with readability in certain cases. 
+        \end{convention}
+        \begin{corollary}[Functoriality of tangent spaces] \label{coro functoriality_of_tangent_spaces}
+            Any morphism $\varphi: X \to Y$ of $C^k$-manifolds covariantly induces a linear map between tangent spaces:
+                $$d\varphi|_x: T_{X, x} \to T_{Y, \varphi(x)}$$
+            that is determined for all $v \in \Der_{\R}(\scrO_{X, x}, \R)$ and all $g \in \scrO_{Y, \varphi(x)}$ by:
+                $$d\varphi|_x( v )[g] := v[g \circ \varphi]$$
+            Note that if $\varphi$ is not differentiable, then the RHS may not be well-defined, as $v$ acts via partial derivatives, which is why we need to assume this. 
+        \end{corollary}
+            \begin{proof}
+                
+            \end{proof}
+        \begin{definition}[Jacobians] \label{def: jacobian}
+            For any morphism $\varphi: X \to Y$ of $C^k$-manifolds, the $\dim Y \x \dim X$ matrix that represents $d\varphi|_x: T_{X, x} \to T_{Y, \varphi(x)}$ - with respect to some basis choices for $T_{X, x}$ and $T_{Y, \varphi(x)}$ - is called the \textbf{Jacobian} at $x$ of $\varphi$. 
+        \end{definition}
+        \begin{definition}[Submersive, unramified, and \'etale morphisms] \label{def: submersive_unramified_and_etale_morphisms}
+            A morphism of $C^k$-manifolds, say $\varphi: X \to Y$ is said to be:
+            \begin{itemize}
+                \item \textbf{submersive} at $x \in X$ if and only if $d\varphi|_x$ is surjective,
+                \item \textbf{unramified} at $x \in X$ if and only if $d\varphi|_x$ is injective, and
+                \item \textbf{\'etale} at $x \in X$ if and only if it is both submersive and unramified, i.e. $d\varphi|_x$ is bijective.
+            \end{itemize}
+            In the second case, any point $x \in X$ for which $\dim( \im d\varphi|_x ) < T_{Y, \varphi(x)}$ is called a \textbf{critical point}, and the subset of $X$ consisting of all such points is the \textbf{critical locus} of $X$.
+        \end{definition}

@@ -6,6 +6,8 @@
 \renewcommand{\>}{\rangle}
 \newcommand\bra[2][]{#1\langle {#2} #1\rvert}
 \newcommand\ket[2][]{#1\lvert {#2} #1\rangle}
+\newcommand\abs[2][]{#1\left\lvert {#2} #1\right\rvert}
+\newcommand\norm[2][]{#1\left\| {#2} #1\right\|}
 \newcommand\order[2][]{#1\: \mathbf{:} \: {#2} #1 \: \mathbf{:} \:}
 \newcommand{\ndiv}{\hspace{-2pt}\not|\hspace{5pt}}
 \newcommand{\cond}{\blacktriangle}
@@ -54,6 +56,7 @@
     \IfValueT{#2}{^{#2}}
   }%
 }
+\newcommand{\simpleroots}{\mathbb{I}}
 \newcommand{\supp}{\operatorname{supp}}
 \newcommand{\im}{\operatorname{im}}
 \newcommand{\coim}{\operatorname{coim}}
@@ -63,6 +66,9 @@
 \newcommand{\trdeg}{\operatorname{trdeg}}
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\trace}{\operatorname{tr}}
+\newcommand{\quantumdet}{\operatorname{qdet}}
+\newcommand{\skdet}{\operatorname{skdet}}
+\newcommand{\quasidet}{\operatorname{quasidet}}
 \newcommand{\length}{\operatorname{length}}
 \newcommand{\height}{\operatorname{ht}}
 \renewcommand{\span}{\operatorname{span}}
@@ -88,6 +94,7 @@
 \newcommand{\sgn}{\operatorname{sgn}}
 \newcommand{\coad}{\operatorname{coad}}
 \newcommand{\ch}{\operatorname{ch}} %characters of representations
+\newcommand{\dist}{\operatorname{dist}} %distance
 
 \newcommand{\Ad}{\mathrm{Ad}}
 \newcommand{\GL}{\mathrm{GL}}
@@ -285,8 +292,9 @@
 \newcommand{\Stab}{\mathrm{Stab}}
 \newcommand{\Cent}{\mathrm{Cent}}
 \newcommand{\Norm}{\mathrm{Norm}}
+\newcommand{\Core}{\mathrm{Core}}
 \newcommand{\cent}{\mathfrak{cent}}
-\newcommand{\norm}{\mathfrak{norm}}
+\newcommand{\core}{\mathfrak{core}}
 \newcommand{\Rad}{\operatorname{Rad}}
 \newcommand{\Transporter}{\mathrm{Transp}} %transporter between two subsets of a group
 \newcommand{\Conj}{\mathrm{Conj}}
@@ -322,8 +330,8 @@
 
 \renewcommand{\projlim}{\varprojlim}
 \newcommand{\indlim}{\varinjlim}
-\newcommand{\colim}{\operatorname{colim}}
-\renewcommand{\lim}{\operatorname{lim}}
+%\newcommand{\colim}{\operatorname{colim}}
+%\renewcommand{\lim}{\operatorname{lim}}
 \newcommand{\toto}{\rightrightarrows}
 %\newcommand{\tensor}{\otimes}
 \NewDocumentCommand{\tensor}{e{_^}}{%
@@ -617,7 +625,8 @@
 %\newcommand{\stab}{\mathrm{stab}}
 \newcommand{\heart}{\heartsuit}
 \newcommand{\proj}{\mathrm{proj}}
-\newcommand{\qproj}{\mathrm{qproj}}
+\newcommand{\rot}{\mathrm{rot}}
+\newcommand{\qproj}{\mathrm{qproj}} %quasi-projective
 \newcommand{\pd}{\mathrm{pd}}
 \newcommand{\crys}{\mathrm{crys}}
 \newcommand{\prisma}{\mathrm{prisma}}
