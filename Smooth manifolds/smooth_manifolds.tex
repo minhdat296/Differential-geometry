@@ -275,7 +275,7 @@
             
         \end{definition}
 
-    \subsection{Submersions, transversality of intersections, and fibred products}
+    \subsection{Tangent spaces}
         \begin{definition}[Tangent spaces] \label{def: tangent_spaces}
             Let $X$ be a $C^k$-manifold (for some $k \in \N \cup \{+\infty\}$). Then, the \textbf{tangent space} at a point $x \in X$ shall be the vector space of degree-$1$ differential operators on $\scrO_{X, x}$ with values in $\R$, i.e.:
                 $$T_{X, x} := \Diff^1_{\R}( \scrO_{X, x}, \R )$$
@@ -321,23 +321,39 @@
         \end{convention}
         \begin{corollary}[Functoriality of tangent spaces] \label{coro functoriality_of_tangent_spaces}
             Any morphism $\varphi: X \to Y$ of $C^k$-manifolds covariantly induces a linear map between tangent spaces:
-                $$d\varphi|_x: T_{X, x} \to T_{Y, \varphi(x)}$$
+                $$d\varphi_x: T_{X, x} \to T_{Y, \varphi(x)}$$
             that is determined for all $v \in \Der_{\R}(\scrO_{X, x}, \R)$ and all $g \in \scrO_{Y, \varphi(x)}$ by:
-                $$d\varphi|_x( v )[g] := v[g \circ \varphi]$$
+                $$d\varphi_x( v )[g] := v|_{\varphi(x)}[g \circ \varphi]$$
             Note that if $\varphi$ is not differentiable, then the RHS may not be well-defined, as $v$ acts via partial derivatives, which is why we need to assume this. 
         \end{corollary}
             \begin{proof}
                 
             \end{proof}
         \begin{definition}[Jacobians] \label{def: jacobian}
-            For any morphism $\varphi: X \to Y$ of $C^k$-manifolds, the $\dim Y \x \dim X$ matrix that represents $d\varphi|_x: T_{X, x} \to T_{Y, \varphi(x)}$ - with respect to some basis choices for $T_{X, x}$ and $T_{Y, \varphi(x)}$ - is called the \textbf{Jacobian} at $x$ of $\varphi$. 
+            For any morphism $\varphi: X \to Y$ of $C^k$-manifolds, the $\dim Y \x \dim X$ matrix that represents $d\varphi_x: T_{X, x} \to T_{Y, \varphi(x)}$ - with respect to some basis choices for $T_{X, x}$ and $T_{Y, \varphi(x)}$ - is called the \textbf{Jacobian} at $x$ of $\varphi$. In terms of local coordinates $x := (x_1, ..., x_{\dim X})$ and $\varphi(x) := (y_1, ..., y_{\dim Y})$, we have that:
+                $$
+                    d\varphi_x =
+                    \begin{pmatrix}
+                        \nabla \varphi_1
+                        \\
+                        \vdots
+                        \\
+                        \nabla \varphi_{\dim Y}
+                    \end{pmatrix}
+                $$
+            wherein $\varphi := (\varphi_1, ..., \varphi_{\dim Y})$ is the component representation, and each row of $d\varphi_x$ is given by $\nabla \varphi_j := \left( \frac{\del \varphi_j}{\del x_i} \right)_{1 \leq i \leq \dim X}$ for each $1 \leq j \leq \dim Y$.  
         \end{definition}
         \begin{definition}[Submersive, unramified, and \'etale morphisms] \label{def: submersive_unramified_and_etale_morphisms}
             A morphism of $C^k$-manifolds, say $\varphi: X \to Y$ is said to be:
             \begin{itemize}
-                \item \textbf{submersive} at $x \in X$ if and only if $d\varphi|_x$ is surjective,
-                \item \textbf{unramified} at $x \in X$ if and only if $d\varphi|_x$ is injective, and
-                \item \textbf{\'etale} at $x \in X$ if and only if it is both submersive and unramified, i.e. $d\varphi|_x$ is bijective.
+                \item \textbf{submersive} at $x \in X$ if and only if $d\varphi_x$ is surjective,
+                \item \textbf{unramified} at $x \in X$ if and only if $d\varphi_x$ is injective, and
+                \item \textbf{\'etale} at $x \in X$ if and only if it is both submersive and unramified, i.e. $d\varphi_x$ is bijective.
             \end{itemize}
-            In the second case, any point $x \in X$ for which $\dim( \im d\varphi|_x ) < T_{Y, \varphi(x)}$ is called a \textbf{critical point}, and the subset of $X$ consisting of all such points is the \textbf{critical locus} of $X$.
+            In the second case, any point $x \in X$ for which $\dim( \im d\varphi_x ) < T_{Y, \varphi(x)}$ is called a \textbf{critical point}, and the subset of $X$ consisting of all such points is the \textbf{critical locus} of $X$.
         \end{definition}
+        \begin{convention}[Immersions]
+            Often, in the differential geometry literature, the domain of an \textbf{immersion} is not assumed to be homeomorphic to its image. However, in algebraic geometry, one always assume that immersions are homeomorphisms onto their images\footnote{At least, \cite{stacks} does ...}. Thus, to avoid linguistic conflicts, let us say that a morphism of topological manifolds $f: X \to Y$ is an \textbf{immersion}\footnote{\cite{lee_smooth_manifolds} calls such morphisms \say{embeddings}.} if and only if the underlying set map is injective.
+            
+            An \textbf{embedding} in the sense of \cite{lee_smooth_manifolds} is an \textit{unramified} immersion between differentiable manifolds. It is important to keep in mind the unramified morphisms, when regarded as maps between the underlying topological spaces, are not injective in general.
+        \end{convention}
